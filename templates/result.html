@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Result</title>
+    <style>
+        body {
+            font-family: Arial;
+            background: linear-gradient(to right, #667eea, #764ba2);
+            margin: 0;
+        }
+
+        .container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        .card {
+            background: white;
+            width: 500px;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0px 10px 30px rgba(0,0,0,0.2);
+            text-align: center;
+        }
+
+        img {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+        }
+
+        .content {
+            padding: 20px;
+        }
+
+        .danger {
+            font-size: 22px;
+            font-weight: bold;
+        }
+
+        .desc {
+            margin-top: 10px;
+            color: #555;
+        }
+
+        iframe {
+            margin-top: 10px;
+            border-radius: 10px;
+        }
+
+        .btn {
+            display: inline-block;
+            margin-top: 20px;
+            padding: 10px 20px;
+            background: #667eea;
+            color: white;
+            border-radius: 5px;
+            text-decoration: none;
+        }
+
+        .btn:hover {
+            background: #5a67d8;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <div class="card">
+        <img src="{{ url_for('static', filename=image) }}">
+
+        <div class="content">
+            <h2>{{ city }}</h2>
+
+            <div class="danger" style="color: {{ color }}">
+                Danger Level: {{ danger }}
+            </div>
+
+            <p class="desc">{{ desc }}</p>
+
+            <!-- MAP -->
+            <h3>📍 Location Map</h3>
+            <iframe
+                width="100%"
+                height="200"
+                src="https://www.google.com/maps?q={{ city }}&output=embed">
+            </iframe>
+
+            <!-- WEATHER -->
+            <h3>🌦️ Weather</h3>
+            <p>Temperature: {{ temp }} °C</p>
+            <p>Condition: {{ weather_desc }}</p>
+
+            <a href="/" class="btn">⬅ Go Back</a>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<body style="text-align:center; margin-top:100px;">
+
+<h2>Login</h2>
+
+<!-- 🔴 ERROR MESSAGE HERE -->
+{% if error %}
+<p style="color:red;">{{ error }}</p>
+{% endif %}
+
+<form method="POST">
+    <input type="text" name="username" placeholder="Username" required><br><br>
+    <input type="password" name="password" placeholder="Password" required><br><br>
+    <button type="submit">Login</button>
+</form>
+
+<p>New user? <a href="/signup">Signup</a></p>
+
+</body>
+</html>

@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Travel Safety</title>
+    <style>
+        body {
+            font-family: Arial;
+            background: linear-gradient(to right, #4facfe, #00f2fe);
+            text-align: center;
+            margin-top: 50px;
+        }
+
+        .top-bar {
+            width: 100%;
+            text-align: right;
+            padding: 10px 20px;
+        }
+
+        .top-bar a {
+            text-decoration: none;
+            color: red;
+            font-weight: bold;
+        }
+
+        form {
+            background: white;
+            padding: 20px;
+            display: inline-block;
+            border-radius: 10px;
+        }
+
+        select {
+            padding: 10px;
+            margin: 10px;
+        }
+
+        button {
+            padding: 10px 20px;
+            background: #4facfe;
+            color: white;
+            border: none;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+
+<!-- 🔥 TOP RIGHT USER + LOGOUT -->
+<div class="top-bar">
+    Welcome {{ session['user'] }} |
+    <a href="/logout">Logout</a>
+</div>
+
+<h1>🌍 Travel Safety Prediction</h1>
+
+<form action="/result" method="POST">
+    <select name="city" required>
+        <option value="">Select City</option>
+        <option value="Delhi">Delhi</option>
+        <option value="Mumbai">Mumbai</option>
+        <option value="Hyderabad">Hyderabad</option>
+        <option value="Bangalore">Bangalore</option>
+        <option value="Chennai">Chennai</option>
+        <option value="Goa">Goa</option>
+    </select><br><br>
+
+    <button type="submit">Check Danger</button>
+</form>
+
+</body>
+</html>
