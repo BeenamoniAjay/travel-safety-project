@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - TravelSafe</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body class="dashboard-page">
+    <!-- Navigation -->
+    <nav class="dashboard-nav">
+        <div class="nav-container">
+            <div class="brand-lockup">
+                <span class="brand-mark">TS</span>
+                <span class="brand-name">TravelSafe</span>
+            </div>
+            <div class="nav-actions">
+                <span class="user-welcome">Welcome, {{ current_user.username }}</span>
+                <a href="{{ url_for('auth.logout') }}" class="logout-btn">Logout</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="dashboard-container">
+        <!-- Hero Section -->
+        <section class="dashboard-hero">
+            <div class="hero-text">
+                <h1>Travel Smarter. Stay Safer.</h1>
+                <p>Check real-time safety insights and travel risk levels for any destination.</p>
+            </div>
+        </section>
+
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                <div class="alert-section">
+                    {% for category, message in messages %}
+                        <div class="alert alert-{{ category }}">
+                            {{ message }}
+                            <button class="close-alert" onclick="this.parentElement.style.display='none';">&times;</button>
+                        </div>
+                    {% endfor %}
+                </div>
+            {% endif %}
+        {% endwith %}
+
+        <!-- Search Section -->
+        <section class="search-section">
+            <div class="search-card">
+                <h2>Check Destination Safety</h2>
+                <form method="POST" action="{{ url_for('main.search') }}" class="search-form">
+                    <div class="form-group">
+                        <label for="city">Select a city</label>
+                        <select id="city" name="city" required class="city-select">
+                            <option value="">Choose a destination...</option>
+                            {% for city in city_list %}
+                                <option value="{{ city }}">{{ city }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                    <button type="submit" class="btn-search">Check Safety</button>
+                </form>
+            </div>
+        </section>
+
+        <!-- Quick Stats -->
+        <section class="quick-stats">
+            <div class="stat-card">
+                <div class="stat-icon">🌍</div>
+                <div class="stat-content">
+                    <h3>Coverage</h3>
+                    <p>120+ Countries Monitored</p>
+                </div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon">📊</div>
+                <div class="stat-content">
+                    <h3>Total Searches</h3>
+                    <p>{{ history|length }} destinations explored</p>
+                </div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon">❤️</div>
+                <div class="stat-content">
+                    <h3>Favorites</h3>
+                    <p>{{ favorites|length }} saved destinations</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Recent History -->
+        {% if history %}
+        <section class="history-section">
+            <h2>Recent Searches</h2>
+            <div class="history-grid">
+                {% for item in history %}
+                <div class="history-item">
+                    <div class="history-header">
+                        <h3>{{ item.city }}</h3>
+                        <span class="risk-badge risk-{{ item.risk_label|lower }}">{{ item.risk_label }}</span>
+                    </div>
+                    <div class="history-details">
+                        <p><strong>Score:</strong> {{ item.score }}/100</p>
+                        <p><strong>Weather:</strong> {{ item.weather }}</p>
+                        <p><strong>Checked:</strong> {{ item.created_at.strftime('%b %d, %Y') }}</p>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </section>
+        {% endif %}
+
+        <!-- Favorites -->
+        {% if favorites %}
+        <section class="favorites-section">
+            <h2>Favorite Destinations</h2>
+            <div class="favorites-grid">
+                {% for fav in favorites %}
+                <div class="favorite-item">
+                    <div class="favorite-city">{{ fav.city }}</div>
+                    <form method="POST" action="{{ url_for('main.remove_favorite', favorite_id=fav.id) }}" style="display:inline;">
+                        <button type="submit" class="remove-favorite">Remove</button>
+                    </form>
+                </div>
+                {% endfor %}
+            </div>
+        </section>
+        {% endif %}
+
+        <!-- Features Highlight -->
+        <section class="dashboard-features">
+            <div class="feature-box">
+                <div class="feature-icon">🚨</div>
+                <h3>Live Alerts</h3>
+                <p>Get instant notifications about travel safety changes.</p>
+            </div>
+            <div class="feature-box">
+                <div class="feature-icon">🗺️</div>
+                <h3>Risk Maps</h3>
+                <p>Visualize safety levels in real time.</p>
+            </div>
+            <div class="feature-box">
+                <div class="feature-icon">🆘</div>
+                <h3>Emergency Mode</h3>
+                <p>Quick access to emergency features when needed.</p>
+            </div>
+        </section>
+    </div>
+</body>
+</html>

@@ -1,0 +1,17 @@
+{% extends 'layout.html' %}
+
+{% block title %}500 Server Error | Travel Safety{% endblock %}
+
+{% block content %}
+<div class="row justify-content-center mt-5">
+    <div class="col-md-8 text-center">
+        <div class="card shadow-sm border-0 py-5">
+            <div class="card-body">
+                <h1 class="display-4 mb-3">500</h1>
+                <p class="lead text-muted">Something went wrong on the server. Try again later.</p>
+                <a href="{{ url_for('main.dashboard') }}" class="btn btn-primary btn-lg mt-3">Return home</a>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

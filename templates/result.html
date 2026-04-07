@@ -1,102 +1,47 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Result</title>
-    <style>
-        body {
-            font-family: Arial;
-            background: linear-gradient(to right, #667eea, #764ba2);
-            margin: 0;
-        }
-
-        .container {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
-        }
-
-        .card {
-            background: white;
-            width: 500px;
-            border-radius: 15px;
-            overflow: hidden;
-            box-shadow: 0px 10px 30px rgba(0,0,0,0.2);
-            text-align: center;
-        }
-
-        img {
-            width: 100%;
-            height: 250px;
-            object-fit: cover;
-        }
-
-        .content {
-            padding: 20px;
-        }
-
-        .danger {
-            font-size: 22px;
-            font-weight: bold;
-        }
-
-        .desc {
-            margin-top: 10px;
-            color: #555;
-        }
-
-        iframe {
-            margin-top: 10px;
-            border-radius: 10px;
-        }
-
-        .btn {
-            display: inline-block;
-            margin-top: 20px;
-            padding: 10px 20px;
-            background: #667eea;
-            color: white;
-            border-radius: 5px;
-            text-decoration: none;
-        }
-
-        .btn:hover {
-            background: #5a67d8;
-        }
-    </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ city }} - Travel Safety Result</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
-<body>
-
-<div class="container">
-    <div class="card">
-        <img src="{{ url_for('static', filename=image) }}">
-
-        <div class="content">
+<body class="page-wrapper">
+    <main class="page-content">
+        <section class="card result-card">
             <h2>{{ city }}</h2>
+            <p class="small-text">Danger Level: <strong>{{ risk.label }}</strong></p>
+            <div class="status-tag {{ risk.label | lower }}">{{ risk.label }}</div>
+            <p class="desc">{{ risk.description }}</p>
 
-            <div class="danger" style="color: {{ color }}">
-                Danger Level: {{ danger }}
+            <div class="city-image">
+                <img src="{{ url_for('static', filename=risk.image) }}" alt="{{ city }} location image" onerror="this.style.display='none'">
             </div>
 
-            <p class="desc">{{ desc }}</p>
+            <div class="info-row">
+                <div class="info-card">
+                    <strong>Temperature</strong>
+                    <p>{{ weather.temperature }} °C</p>
+                </div>
+                <div class="info-card">
+                    <strong>Condition</strong>
+                    <p>{{ weather.description | capitalize }}</p>
+                </div>
+            </div>
 
-            <!-- MAP -->
-            <h3>📍 Location Map</h3>
-            <iframe
-                width="100%"
-                height="200"
-                src="https://www.google.com/maps?q={{ city }}&output=embed">
-            </iframe>
+            <div class="map-box">
+                <iframe src="https://www.google.com/maps?q={{ city }}&output=embed" allowfullscreen loading="lazy"></iframe>
+            </div>
 
-            <!-- WEATHER -->
-            <h3>🌦️ Weather</h3>
-            <p>Temperature: {{ temp }} °C</p>
-            <p>Condition: {{ weather_desc }}</p>
-
-            <a href="/" class="btn">⬅ Go Back</a>
-        </div>
-    </div>
-</div>
-
+            <div class="button-row">
+                {% if not is_favorite %}
+                    <form method="POST" action="{{ url_for('main.add_favorite', city=city) }}">
+                        <button type="submit">Save favorite</button>
+                    </form>
+                {% endif %}
+                <a href="{{ url_for('main.dashboard') }}" class="btn-link">Go Back</a>
+            </div>
+        </section>
+    </main>
 </body>
 </html>

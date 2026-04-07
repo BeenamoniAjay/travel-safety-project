@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign In - TravelSafe</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body class="cubefactory-login-page">
+    <div class="login-container">
+        <!-- Left Side - Form -->
+        <div class="login-form-side">
+            <a href="{{ url_for('main.index') }}" class="brand-small">
+                <span class="brand-mark-small">TS</span>
+                <span>TravelSafe</span>
+            </a>
+
+            <div class="form-wrapper">
+                <h1 class="login-title">Welcome back</h1>
+                <p class="login-subtitle">Please enter your details</p>
+
+                {% with messages = get_flashed_messages(with_categories=true) %}
+                    {% if messages %}
+                        <div class="alert-container">
+                            {% for category, message in messages %}
+                                <div class="alert alert-{{ category }}">{{ message }}</div>
+                            {% endfor %}
+                        </div>
+                    {% endif %}
+                {% endwith %}
+
+                <form method="POST" id="loginForm" class="cubefactory-form">
+                    <div class="form-field-group">
+                        <label for="email">Email address</label>
+                        <input 
+                            id="email" 
+                            name="email" 
+                            type="email" 
+                            class="form-field-input"
+                            placeholder="you@example.com"
+                            autocomplete="email"
+                            required
+                        >
+                    </div>
+
+                    <div class="form-field-group">
+                        <label for="password">Password</label>
+                        <div class="password-field-wrapper">
+                            <input 
+                                id="password" 
+                                name="password" 
+                                type="password"
+                                class="form-field-input"
+                                placeholder="••••••"
+                                autocomplete="current-password"
+                                required
+                            >
+                            <button type="button" id="passwordToggle" class="password-toggle-btn" aria-label="Toggle password">👁️</button>
+                        </div>
+                    </div>
+
+                    <div class="form-options">
+                        <label class="checkbox-custom">
+                            <input type="checkbox" name="remember">
+                            <span>Remember for 30 days</span>
+                        </label>
+                        <a href="#" class="forgot-password-link">Forgot password</a>
+                    </div>
+
+                    <button type="submit" class="btn-signin" id="signInBtn">
+                        <span class="btn-text">Sign in</span>
+                        <span class="btn-spinner"></span>
+                    </button>
+                </form>
+
+                <div class="divider-line">or continue with</div>
+
+                <button type="button" class="btn-google">
+                    <svg class="google-icon" viewBox="0 0 24 24" width="20" height="20">
+                        <text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle" font-size="16" font-weight="bold">G</text>
+                    </svg>
+                    Sign in with Google
+                </button>
+
+                <p class="signup-prompt">
+                    Don't have an account? 
+                    <a href="{{ url_for('auth.signup') }}">Sign up</a>
+                </p>
+            </div>
+        </div>
+
+        <!-- Right Side - Illustration -->
+        <div class="login-visual-side">
+            <div class="visual-background"></div>
+            <svg class="travel-illustration" viewBox="0 0 400 500" xmlns="http://www.w3.org/2000/svg">
+                <!-- Animated background elements -->
+                <g class="animated-icons">
+                    <circle cx="60" cy="80" r="25" fill="none" stroke="rgba(255,255,255,0.3)" stroke-width="2" opacity="0.6"/>
+                    <rect x="280" y="120" width="40" height="40" rx="8" fill="none" stroke="rgba(255,255,255,0.3)" stroke-width="2" opacity="0.5"/>
+                    <circle cx="320" cy="280" r="20" fill="none" stroke="rgba(255,255,255,0.2)" stroke-width="2" opacity="0.4"/>
+                    <path d="M 100 400 Q 120 380 140 400" stroke="rgba(255,255,255,0.2)" stroke-width="2" fill="none" opacity="0.5"/>
+                </g>
+
+                <!-- Main character silhouette -->
+                <g class="traveler-figure">
+                    <!-- Head -->
+                    <circle cx="200" cy="100" r="35" fill="#000" opacity="0.9"/>
+                    <!-- Body -->
+                    <ellipse cx="200" cy="180" rx="50" ry="70" fill="#1a1a1a" opacity="0.95"/>
+                    <!-- Arms -->
+                    <rect x="80" y="150" width="45" height="25" rx="12" fill="#000" opacity="0.85" transform="rotate(-20 102 162)"/>
+                    <rect x="275" y="150" width="45" height="25" rx="12" fill="#000" opacity="0.85" transform="rotate(20 297 162)"/>
+                    <!-- Legs -->
+                    <rect x="170" y="250" width="25" height="60" rx="12" fill="#1a1a1a" opacity="0.9"/>
+                    <rect x="205" y="250" width="25" height="60" rx="12" fill="#1a1a1a" opacity="0.9"/>
+                </g>
+
+                <!-- Travel elements -->
+                <g class="travel-elements">
+                    <!-- Globe icon -->
+                    <circle cx="100" cy="200" r="25" fill="none" stroke="rgba(255,255,255,0.4)" stroke-width="2" opacity="0.8"/>
+                    <circle cx="100" cy="200" r="20" fill="none" stroke="rgba(255,255,255,0.2)" stroke-width="1.5" opacity="0.6"/>
+                    <!-- Checkmark -->
+                    <circle cx="280" cy="160" r="28" fill="rgba(255,255,255,0.15)" opacity="0.9"/>
+                    <path d="M 265 160 L 275 170 L 295 150" stroke="rgba(255,255,255,0.8)" stroke-width="3" fill="none" stroke-linecap="round" stroke-linejoin="round" opacity="0.9"/>
+                </g>
+
+                <!-- Chat bubble (wanderlust message) -->
+                <g class="chat-element">
+                    <rect x="260" y="320" width="120" height="60" rx="12" fill="rgba(255,255,255,0.1)" stroke="rgba(255,255,255,0.3)" stroke-width="2"/>
+                    <text x="320" y="355" text-anchor="middle" fill="rgba(255,255,255,0.6)" font-size="13" font-family="Arial">Safe travels</text>
+                </g>
+            </svg>
+            <div class="visual-accent-circle"></div>
+        </div>
+    </div>
+
+    <script>
+        const passwordToggle = document.getElementById('passwordToggle');
+        const passwordInput = document.getElementById('password');
+        const loginForm = document.getElementById('loginForm');
+        const signInBtn = document.getElementById('signInBtn');
+
+        if (passwordToggle && passwordInput) {
+            passwordToggle.addEventListener('click', (e) => {
+                e.preventDefault();
+                const isHidden = passwordInput.type === 'password';
+                passwordInput.type = isHidden ? 'text' : 'password';
+                passwordToggle.textContent = isHidden ? '🙈' : '👁️';
+            });
+        }
+
+        if (loginForm && signInBtn) {
+            loginForm.addEventListener('submit', () => {
+                signInBtn.disabled = true;
+                signInBtn.classList.add('loading');
+            });
+        }
+    </script>
+</body>
+</html>

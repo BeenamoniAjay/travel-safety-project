@@ -1,71 +1,209 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>Travel Safety</title>
-    <style>
-        body {
-            font-family: Arial;
-            background: linear-gradient(to right, #4facfe, #00f2fe);
-            text-align: center;
-            margin-top: 50px;
-        }
-
-        .top-bar {
-            width: 100%;
-            text-align: right;
-            padding: 10px 20px;
-        }
-
-        .top-bar a {
-            text-decoration: none;
-            color: red;
-            font-weight: bold;
-        }
-
-        form {
-            background: white;
-            padding: 20px;
-            display: inline-block;
-            border-radius: 10px;
-        }
-
-        select {
-            padding: 10px;
-            margin: 10px;
-        }
-
-        button {
-            padding: 10px 20px;
-            background: #4facfe;
-            color: white;
-            border: none;
-            border-radius: 5px;
-        }
-    </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TravelSafe - Travel Safety First</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
-<body>
+<body class="landing-page">
+    <!-- Navigation -->
+    <nav class="landing-nav">
+        <div class="nav-container">
+            <div class="brand-lockup">
+                <span class="brand-mark">TS</span>
+                <span class="brand-name">TravelSafe</span>
+            </div>
+            <div class="nav-links">
+                <a href="#features">Features</a>
+                <a href="#how-it-works">How It Works</a>
+                <a href="#testimonials">Testimonials</a>
+            </div>
+            <div class="nav-cta">
+                <a href="{{ url_for('auth.login') }}" class="btn-outline">Sign In</a>
+                <a href="{{ url_for('auth.signup') }}" class="btn-primary">Get Started</a>
+            </div>
+        </div>
+    </nav>
 
-<!-- 🔥 TOP RIGHT USER + LOGOUT -->
-<div class="top-bar">
-    Welcome {{ session['user'] }} |
-    <a href="/logout">Logout</a>
-</div>
+    <!-- Hero Section -->
+    <section class="hero-landing">
+        <div class="hero-content">
+            <h1>Safety first. Adventure always.</h1>
+            <p>Real-time travel intelligence, risk mapping, and emergency support. Travel smarter, travel safer.</p>
+            <div class="hero-cta">
+                <a href="{{ url_for('auth.signup') }}" class="btn-primary-lg">Get Started Free</a>
+                <a href="#how-it-works" class="btn-secondary-lg">Learn More</a>
+            </div>
+        </div>
+        <div class="hero-visual">
+            <div class="hero-card-group">
+                <div class="stat-item">
+                    <span class="stat-icon">🛡️</span>
+                    <span>120+ Countries</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-icon">👥</span>
+                    <span>1M+ Travelers</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-icon">⭐</span>
+                    <span>4.8★ Rating</span>
+                </div>
+            </div>
+        </div>
+    </section>
 
-<h1>🌍 Travel Safety Prediction</h1>
+    <!-- Features Section -->
+    <section class="features-landing" id="features">
+        <div class="section-intro">
+            <h2>What you get with TravelSafe</h2>
+            <p>Comprehensive tools to travel with confidence</p>
+        </div>
+        <div class="features-grid">
+            <div class="feature-item">
+                <div class="feature-icon">🚨</div>
+                <h3>Live Alerts</h3>
+                <p>Know what's happening around you and your destination in real time.</p>
+            </div>
+            <div class="feature-item">
+                <div class="feature-icon">🗺️</div>
+                <h3>Risk Maps</h3>
+                <p>Visualize safety levels and avoid high-risk areas in cities worldwide.</p>
+            </div>
+            <div class="feature-item">
+                <div class="feature-icon">📍</div>
+                <h3>Real-Time Tracking</h3>
+                <p>Share your location with trusted contacts for added peace of mind.</p>
+            </div>
+            <div class="feature-item">
+                <div class="feature-icon">🆘</div>
+                <h3>Emergency Mode</h3>
+                <p>Get immediate help and alert your contacts with your exact location instantly.</p>
+            </div>
+            <div class="feature-item">
+                <div class="feature-icon">📋</div>
+                <h3>Local Insights</h3>
+                <p>Comprehensive safety guides and destination briefings before you travel.</p>
+            </div>
+            <div class="feature-item">
+                <div class="feature-icon">✈️</div>
+                <h3>Trip Planner</h3>
+                <p>Plan your journey with integrated safety recommendations and alerts.</p>
+            </div>
+        </div>
+    </section>
 
-<form action="/result" method="POST">
-    <select name="city" required>
-        <option value="">Select City</option>
-        <option value="Delhi">Delhi</option>
-        <option value="Mumbai">Mumbai</option>
-        <option value="Hyderabad">Hyderabad</option>
-        <option value="Bangalore">Bangalore</option>
-        <option value="Chennai">Chennai</option>
-        <option value="Goa">Goa</option>
-    </select><br><br>
+    <!-- How It Works -->
+    <section class="how-it-works" id="how-it-works">
+        <div class="section-intro">
+            <h2>How TravelSafe keeps you ahead</h2>
+            <p>Three steps to safer travel</p>
+        </div>
+        <div class="steps-grid">
+            <div class="step-card">
+                <div class="step-number">1</div>
+                <h3>Before You Go</h3>
+                <p>Get pre-trip briefings, destination intelligence, and safety checklists tailored to your journey.</p>
+            </div>
+            <div class="step-card">
+                <div class="step-number">2</div>
+                <h3>While You Travel</h3>
+                <p>Receive live alerts, dynamic risk scoring, and smart navigation through safer routes.</p>
+            </div>
+            <div class="step-card">
+                <div class="step-number">3</div>
+                <h3>If Things Go Wrong</h3>
+                <p>Emergency Mode activates instant help, location sharing, and contact notifications.</p>
+            </div>
+        </div>
+    </section>
 
-    <button type="submit">Check Danger</button>
-</form>
+    <!-- Testimonials -->
+    <section class="testimonials" id="testimonials">
+        <div class="section-intro">
+            <h2>Trusted by travelers worldwide</h2>
+            <p>Real stories from real travelers</p>
+        </div>
+        <div class="testimonials-grid">
+            <div class="testimonial-card">
+                <div class="quote-mark">"</div>
+                <p class="testimonial-text">I felt so much safer knowing I could check real-time safety data before arriving. TravelSafe made the difference in my solo trip planning.</p>
+                <div class="testimonial-author">
+                    <div class="author-avatar">SA</div>
+                    <div class="author-info">
+                        <h4>Sarah A.</h4>
+                        <span>Solo Traveler</span>
+                    </div>
+                </div>
+            </div>
+            <div class="testimonial-card">
+                <div class="quote-mark">"</div>
+                <p class="testimonial-text">As a business traveler, the live alerts and emergency mode feature have become essential to my travel routine. Highly recommended.</p>
+                <div class="testimonial-author">
+                    <div class="author-avatar">MJ</div>
+                    <div class="author-info">
+                        <h4>Michael J.</h4>
+                        <span>Business Traveler</span>
+                    </div>
+                </div>
+            </div>
+            <div class="testimonial-card">
+                <div class="quote-mark">"</div>
+                <p class="testimonial-text">TravelSafe's risk maps helped me avoid areas to steer clear of. It's like having a local guide in your pocket.</p>
+                <div class="testimonial-author">
+                    <div class="author-avatar">EP</div>
+                    <div class="author-info">
+                        <h4>Emma P.</h4>
+                        <span>Adventure Traveler</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
 
+    <!-- CTA Section -->
+    <section class="cta-section">
+        <h2>Travel safer. Travel smarter. Travel with TravelSafe.</h2>
+        <div class="cta-buttons">
+            <a href="{{ url_for('auth.signup') }}" class="btn-primary-lg">Get Started Free</a>
+            <a href="{{ url_for('auth.login') }}" class="btn-secondary">Sign In</a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="landing-footer">
+        <div class="footer-content">
+            <div class="footer-section">
+                <h4>Product</h4>
+                <ul>
+                    <li><a href="#features">Features</a></li>
+                    <li><a href="#how-it-works">How It Works</a></li>
+                    <li><a href="#">Security</a></li>
+                    <li><a href="#">Pricing</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h4>Learn</h4>
+                <ul>
+                    <li><a href="#">About Us</a></li>
+                    <li><a href="#">Blog</a></li>
+                    <li><a href="#">Safety Tips</a></li>
+                    <li><a href="#">Resources</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h4>Legal</h4>
+                <ul>
+                    <li><a href="#">Privacy</a></li>
+                    <li><a href="#">Terms</a></li>
+                    <li><a href="#">Contact</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2026 TravelSafe. All rights reserved. | Safety first. Adventure always.</p>
+        </div>
+    </footer>
 </body>
 </html>
