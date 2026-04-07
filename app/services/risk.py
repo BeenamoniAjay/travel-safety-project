@@ -16,6 +16,11 @@ def _ensure_risk_model(app):
         return
 
     model_path = Path(app.config['MODEL_PATH'])
+
+    # ✅ ADD THESE 2 LINES HERE
+    print("MODEL PATH:", model_path)
+    print("DATA PATH:", app.config['CITY_DATA_PATH'])
+
     if not model_path.exists():
         raise RuntimeError(f'Model file not found at {model_path}')
 
