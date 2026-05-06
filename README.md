@@ -171,3 +171,9 @@ This project is licensed under the MIT License - see the LICENSE file for detail
 - Weather data from OpenWeatherMap API
 - UI components from Bootstrap
 - Charts powered by Chart.js
+
+<img width="1888" height="962" alt="image" src="https://github.com/user-attachments/assets/687a5041-7228-4766-9b72-aac153db6cd5" />
+<img width="1900" height="1005" alt="image" src="https://github.com/user-attachments/assets/73f7cbda-19d4-454f-afe6-9815c102b472" />
+<img width="1901" height="1004" alt="image" src="https://github.com/user-attachments/assets/408a795a-e9ab-40d3-ac4d-7352bc65ca4b" />
+<img width="1886" height="1069" alt="image" src="https://github.com/user-attachments/assets/d77981eb-a18f-487a-94fe-32949ae8765a" />
+
